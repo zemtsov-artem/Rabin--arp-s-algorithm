@@ -11,7 +11,7 @@ export PATH=/usr/local/bin:$PATH
 g++-5 -std=c++11 -fopenmp CFilename.c -o BinaryFilename
 ```
 
-* And you can create new sublime build system 
+* And you can create new sublime build system. It help for you to miss second step in everynew build
 
 ```
 Tools -> Build System -> Add new build system - > Paste code from /helpFiles/openmp.sublime-build
