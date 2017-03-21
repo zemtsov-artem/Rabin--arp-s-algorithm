@@ -10,3 +10,9 @@ export PATH=/usr/local/bin:$PATH
 ```sh
 g++-5 -std=c++11 -fopenmp CFilename.c -o BinaryFilename
 ```
+
+* And you can create new sublime build system 
+
+```
+Tools -> Build System -> Add new build system - > Paste code from /helpFiles/openmp.sublime-build
+```
