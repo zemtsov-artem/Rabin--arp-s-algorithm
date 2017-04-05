@@ -1,17 +1,16 @@
 #include <string>
 #include "hashFunc.cpp"
-int RabinKarp(std::string s, std::string sub) {
-		long substringHash = hashFunc(sub);
-		long hsub = substringHash;
-
-		long hs = hashFunc(s.substr(1,sub.size()) );
-		for (int i = 1;i < (s.size()-sub.size()+1);i++){
-	    	if (hs = hsub ){
-	        	if (s.substr(i,i+sub.size()-1) == sub ){
-	            	return i;
-	        	}
-	    	}
-	    	hs = hashFunc(s.substr(i+1,i+sub.size() ));
-	    }
-		return 0;
-	}
+int RabinKarp(std::string mainStr, std::string sub) {
+	const int subLength = sub.size();
+	long desiredSubStrHash = hashFunc(sub);
+	long hs = hashFunc(mainStr.substr(0,sub.size()) );
+	for (int i = 0;i < mainStr.size()-sub.size();i++){
+	   	if (hs == desiredSubStrHash ){
+	       	if (mainStr.substr(i,subLength) == sub ){
+	           	return i;
+	       	}
+	   	}
+	   	hs = hashFunc(mainStr.substr(i+1,subLength ));
+	   }
+return 0;
+}
