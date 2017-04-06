@@ -12,11 +12,12 @@ int RabinKarp(std::string mainStr, std::string sub,int NUMBER_OF_THREADS) {
 	const clock_t begin_time = clock();
 	const long desiredSubStrHash = hashFunc(sub);
 	const int numberOfPlots = mainStr.size() / sub.size();
-	
+
 	(mainStr.size() % sub.size())  ?
 			lastPlotSize = mainStr.size() % sub.size() + sub.size() :
 			lastPlotSize = sub.size();
-	#pragma omp parallel reduction(+:num) num_threads(NUMBER_OF_THREADS) 
+
+	#pragma omp parallel num_threads(NUMBER_OF_THREADS) 
 	{	
 		const int threadsDiap = numberOfPlots / omp_get_num_threads();
 
@@ -28,7 +29,7 @@ int RabinKarp(std::string mainStr, std::string sub,int NUMBER_OF_THREADS) {
 			num = singleThreadRabinPark(mainStr,sub);
 		}
 		else {
-			#pragma parallel for num_threads(NUMBER_OF_THREADS)
+			#pragma parallel for reduction(+:num)
 			for (int i = 0; i < sub.size() * threadsDiap ; i++)
 			{
 				long hs;
@@ -37,7 +38,7 @@ int RabinKarp(std::string mainStr, std::string sub,int NUMBER_OF_THREADS) {
 				}
 				int startPos = sub.size() * threadsDiap * omp_get_thread_num() + i ;
 				if ((hs == desiredSubStrHash )&&(mainStr.substr(startPos,sub.size()) == sub )){
-			       	#pragma omp atomic
+			       	//#pragma omp atomic
 			        num++;
 			   	}
 			   	hs = hashFunc(mainStr.substr(startPos+1,sub.size() ));	

@@ -7,7 +7,7 @@
 long hashFunc(std::string _inputValue) {
 	int stringSize = _inputValue.size();
 	long sum = 0;
-	#pragma parallel for private(sum)
+	#pragma parallel for reduction(+:sum)
 	for (int i = 0; i < stringSize; ++i) {
 		sum += (int)_inputValue.at(i) * pow(101,stringSize - i -1);
 	}

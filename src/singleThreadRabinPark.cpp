@@ -8,6 +8,7 @@ int singleThreadRabinPark(std::string mainStr, std::string sub) {
 	   	if ((hs == desiredSubStrHash ) && (mainStr.substr(i,sub.size()) == sub )){
 			result++;
 	   	}
+
 	   	hs = hashFunc(mainStr.substr(i+1,sub.size() ));
 	   }
 	return result;
