@@ -2,21 +2,26 @@
 #include <fstream> 
 #include "../src/rabinPark.cpp"
 #define pathToTheFile "../filesToRead/WP.txt"
+#define pathToTheFile2 "../filesToRead/text.txt"
+#define NUMBER_OF_THR 2
 
 
 int main(int argc, char const *argv[]){
-	std::string ourSubString,str,strTotal;
+	std::string str,strTotal,ourSubString;
 	std::ifstream in;
+
 	in.open(pathToTheFile);
 	while ( in ) {
 		getline(in,str);
  	  	strTotal += str;
 	}
+	in.close();
 
-	std::cout <<"You work with War and Peace" << std::endl 
-			  << "Enter desired substring" << std::endl;
+	printf("Enter your substring\n");
+
 	std::cin >> ourSubString;
-	int result = RabinKarp(strTotal,ourSubString);
-	(result != 0) ? std::cout << result <<std::endl  : std::cout << "Not found" <<std::endl;
+	int result = RabinKarp(strTotal,ourSubString,NUMBER_OF_THR);
+
+	printf("%d\n", "Count = " );
 	return 0;
 }
